@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmoundir <kmoundir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 15:29:23 by kmoundir          #+#    #+#             */
-/*   Updated: 2024/10/23 17:18:40 by kmoundir         ###   ########.fr       */
+/*   Created: 2024/10/16 18:15:57 by kmoundir          #+#    #+#             */
+/*   Updated: 2024/10/23 18:54:06 by kmoundir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 char *free_mem(char **ptr)
 {
@@ -88,42 +87,18 @@ char	*ft_get_rest_line(char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*rest;
+	static char	*rest[4096];
 	char		*line;
 
 	if (fd < 0 )
 		return (NULL);
-	rest = ft_get_line(fd, rest);
-	if (!rest)
+	rest[fd] = ft_get_line(fd, rest[fd]);
+	if (!rest[fd])
 		return (NULL);
-	line = ft_get_new_line(rest);
+	line = ft_get_new_line(rest[fd]);
 	if(!line)
-		return (free_mem(&rest));	
-	rest = ft_get_rest_line(rest);
+		return (free_mem(&rest[fd]));	
+	rest[fd] = ft_get_rest_line(rest[fd]);
 	return (line);
 }
 
-/*
-int main(void)
-{
-	int file = open("1char.txt", O_RDONLY);
-	if (file < 0)
-	{
-		perror("Error opening file");
-		return (1);
-	}
-	char *line;
-	while ((line = get_next_line(file)) != NULL)
-	{ 
-		printf("%s", line);
-		
-		free(line);
-	}
-	if(line == NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}	
-	close(file);
-	return (0);
-}*/
