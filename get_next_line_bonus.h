@@ -6,7 +6,7 @@
 /*   By: kmoundir <kmoundir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:15:50 by kmoundir          #+#    #+#             */
-/*   Updated: 2024/10/23 18:19:03 by kmoundir         ###   ########.fr       */
+/*   Updated: 2024/10/25 15:59:47 by kmoundir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <limits.h>
-
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif
 
-char	*ft_strjoin(char *s1, char  *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
-char	*ft_strdup(char *s);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
